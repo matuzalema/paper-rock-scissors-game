@@ -1,0 +1,43 @@
+
+body{
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 18px;
+}
+.container {
+	margin-top: 50px;
+}
+
+.buttons {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.playerTextField {
+	color: blue;
+}
+
+.resultOutput {
+	color: orange;
+	margin: 10px 0;
+}
+
+.display {
+	display: none;
+}
+
+#newGame {
+	margin: 20px 0;
+}
+
+#rounds {
+	margin: 10px 0;
+}
+
+.btn {
+	margin: 10px;
+}
+
+#result {
+	color: red;
+}
