@@ -25,8 +25,8 @@ var clearFields = function(){
 	resultOutput.innerHTML = "";
 };
 
-// new game
-buttons.classList.add('display');
+// new game.
+buttons.classList.add('display'); 
 newGameButton.addEventListener("click", function(){
 	clearFields();
 	playerScore = 0;
