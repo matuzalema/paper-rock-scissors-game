@@ -1,39 +1,88 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,900");
 body {
   box-sizing: border-box;
   text-align: center;
-  font-size: 18px; }
+  font-size: 18px;
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Lato', sans-serif;
+  background-color: #F1E3E2;
+  background-position: center top; }
+
+main {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 50px; }
+
+h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  color: #000; }
 
 .container {
-  margin-top: 50px; }
+  margin-top: 50px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center; }
 
 .buttons {
   text-align: center;
   margin-top: 50px; }
 
+button.player-move {
+  background-color: #fff;
+  color: #704848;
+  border: 2px solid #704848;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px; }
+
 .playerTextField {
-  color: blue; }
+  color: #000; }
 
 .resultOutput {
-  color: orange;
+  color: #DD130C;
   margin: 10px 0; }
 
-.display {
+.hide {
   display: none; }
 
 #newGame {
-  margin: 20px 0; }
+  margin: 30px 0;
+  border: none; }
+
+i {
+  font-size: 35px; }
 
 #rounds {
-  margin: 10px 0; }
-
-.btn {
   margin: 10px; }
 
-#result {
-  color: red; }
+.btn {
+  margin: 15px;
+  border: 2px solid grey; }
 
-td {
-  border: 1px solid black; }
+#result {
+  color: #DD130C;
+  padding-bottom: 10px;
+  font-weight: 700; }
+
+td, th {
+  border: 1px solid #b2bec3;
+  padding: 5px;
+  font-weight: 300; }
+
+tr:hover {
+  background-color: #dfe6e9; }
+
+th {
+  color: #fff;
+  background-color: #2b638e;
+  text-transform: uppercase;
+  font-size: 14px; }
 
 .overlay {
   display: none;
@@ -50,11 +99,14 @@ td {
 .modal {
   display: block;
   background: #fff;
-  width: 200px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0); }
+  transform: translate3d(-50%, -50%, 0);
+  overflow: auto;
+  color: #2d3436;
+  border: 3px solid #2b638e;
+  border-radius: 5px; }
 
 .modal.show {
   display: block; }
@@ -68,12 +120,18 @@ td {
   text-decoration: none; }
 
 .modal header {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
   min-height: 30px;
   font-weight: bold;
-  padding: 0 30px; }
+  padding: 0 30px;
+  text-transform: uppercase;
+  padding: 20px 0 0 10px;
+  color: #2b638e; }
 
 .modal .content {
   min-height: 30px;
   padding: 5px 30px; }
+
+table {
+  margin: 10px auto; }

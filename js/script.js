@@ -1,6 +1,8 @@
 var paper = document.getElementById("paper");
 var rock = document.getElementById("rock");
 var scissors = document.getElementById("scissors");
+var buttons = document.getElementById("buttons");
+
 var newGameButton = document.getElementById("newGame");
 var playerChoiceText = document.getElementById("playerChoice");
 var compChoiceText = document.getElementById("compChoice");
@@ -8,9 +10,9 @@ var resultOutput = document.getElementById("resultOutput");
 var resultOfRounds = document.getElementById("result");
 var rounds = document.getElementById("rounds");
 var textFinished = document.getElementById("textFinished");
-var buttons = document.getElementById("buttons");
 var scoreOutput = document.getElementById("scoreOutput");
 var buttonsToPlay = document.getElementsByClassName('player-move');
+var outputEntered = document.getElementById("outputEntered");
 
 // var resultText;var compChoice;
 // var playerScore = 0;
@@ -30,6 +32,7 @@ var params = {
 	playerScore : 0, 
 	compScore : 0,
 	numberOfRounds: null,
+	roundNumber: 0,
 	progress : []
 };
 
@@ -43,12 +46,9 @@ function RoundsStatus(roundNumber, roundPlayerChoice, roundCompChoice, roundPlay
 
 
 // add date to table - number round
-var addnumberOfRounds = function(){
-	params.numberOfRounds = tableRounds.insertAdjacentHTML('afterbegin', '<p> jeden </p>');
-};
-
-addnumberOfRounds();
-// clear fields
+// var addnumberOfRounds = function(){
+// 	params... = tableRounds.insertAdjacentHTML('afterbegin', '<p> jeden </p>');
+// };
 
 var clearFields = function(){
 	playerChoiceText.innerHTML = "";
@@ -56,21 +56,44 @@ var clearFields = function(){
 	resultOfRounds.innerHTML = "";
 	resultOutput.innerHTML = "";
 	scoreOutput.innerHTML = "";
+	params.playerScore = 0;
+	params.compScore = 0;
+	params.progress = [];
+	params.roundNumber = 1;
 };
+
+var validateAndDisplayFields = function(textForChecking){
+  if (textForChecking == null) { 
+  } else if (textForChecking == '' || isNaN(textForChecking)) {
+    	if(textForChecking == ''){
+    		outputEntered.innerHTML = 'Please enter number';
+    	} else {
+    		 outputEntered.innerHTML = 'You have to enter number';
+    	}  
+    rounds.innerHTML = "";
+    buttons.classList.add('hide');
+    rounds.classList.add('hide');
+    clearFields();
+	refreshTable();
+  } else {
+    outputEntered.innerHTML = "";
+    rounds.innerHTML = params.numberOfRounds + " rounds means victory";
+    buttons.classList.remove('hide');
+    rounds.classList.remove('hide');
+    clearFields();
+	refreshTable();
+  }
+};
+
 
 // new game
 
-buttons.classList.add('display'); 
+buttons.classList.add('hide');
+
 newGameButton.addEventListener("click", function(){
-	clearFields();
-	params.playerScore = 0;
-	params.compScore = 0;
 	
 	params.numberOfRounds = prompt("How many won rounds you have to finish the game");
-	rounds.innerHTML = params.numberOfRounds + " rounds means victory";
-	buttons.classList.remove('display');
-	rounds.classList.remove('display');
-	
+	validateAndDisplayFields(params.numberOfRounds);	
 });
 
 //Listeners - buttons papper, rock, scissors
@@ -89,14 +112,18 @@ var playerMove = function(playerChoice){
 	storeCompChoice(randomNumber());
 	addScoreText();
 	roundsCounter();
-	scoreOutput.innerHTML = params.playerScore + ":" + params.compScore;
+	scoreOutput.innerHTML = params.playerScore + " : " + params.compScore;
 	printToFinishText();
+	params.roundNumber += 1;
+	console.log(params.roundNumber);
+	refreshTable();
 	
 };
 
 var addScoreText = function(){
 	resultOutput.innerHTML = "";
-	params.resultText = resultOutput.insertAdjacentHTML('afterbegin', resultOfDraw() + "<br>" +  "You played: " + choiceOfPlayer(params.playerChoice) + "<br>" + " Computer played: " + params.compChoice);
+	params.resultText = resultOutput.insertAdjacentHTML('afterbegin', resultOfDraw() );
+		// + "<br>" +  "You played: " + choiceOfPlayer(params.playerChoice) + "<br>" + " Computer played: " + params.compChoice);
 };
 
 var storePlayerChoice = function(choice){
@@ -160,12 +187,34 @@ var roundsCounter = function (){
 	}
 
 	//store result status for history
-	var roundsStatus = new RoundsStatus(1, params.playerChoice, params.compChoice, params.playerScore, params.compScore);
+	var roundsStatus = new RoundsStatus(params.roundNumber, params.playerChoice, params.compChoice, params.playerScore, params.compScore);
 
 	params.progress.push(roundsStatus);
 };
 
+	// create table
 
+	var refreshTable = function(){
+		// clear table
+		var tableData = document.getElementById("tableData");
+			tableData.innerHTML = ""; 
+
+		// add new table
+		for (var i=params.progress.length-1; i>-1; i--){
+			tableData.insertAdjacentHTML('afterbegin', 
+				'<tr>'+
+				'<td>' + params.progress[i].roundNumber + '</td>'+
+				'<td>' + params.progress[i].roundPlayerChoice + '</td>'+
+
+
+				'<td>' + params.progress[i].roundCompChoice + '</td>'+
+				'<td>' + params.progress[i].roundPlayerScore + '</td>'+
+				'<td>' + params.progress[i].roundCompScore + '</td>'+
+				'</tr>');
+		}
+	};
+
+	
 // finish game
 
 var printToFinishText = function(){
@@ -181,6 +230,7 @@ var printResultOfGame = function() {
 	} else {
 		document.getElementById("modal-overlay").classList.add('show');
 		return 'Computer won!';
+		
 	}
 };
 
@@ -208,8 +258,8 @@ var printResultOfGame = function() {
     event.preventDefault();
     document.querySelector('#modal-overlay').classList.remove('show');
     clearFields();
-    buttons.classList.add('display');
-    rounds.classList.add('display');
+    buttons.classList.add('hide');
+    rounds.classList.add('hide');
 
     // getCurrentLink.classList.remove('show');
   };
