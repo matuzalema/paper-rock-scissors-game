@@ -35,8 +35,8 @@ h2 {
 
 button.player-move {
   background-color: #fff;
-  color: #704848;
-  border: 2px solid #704848;
+  color: #af9292;
+  border: 2px solid #af9292;
   border-radius: 50%;
   width: 65px;
   height: 65px; }
@@ -56,7 +56,7 @@ button.player-move {
   border: none; }
 
 i {
-  font-size: 35px; }
+  font-size: 30px; }
 
 #rounds {
   margin: 10px; }
