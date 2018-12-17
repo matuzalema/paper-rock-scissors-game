@@ -45,6 +45,7 @@ button.player-move {
 	width: 65px;
 	height: 65px;
 }
+
 .playerTextField {
 	color: $main-color;
 }
@@ -64,7 +65,7 @@ button.player-move {
 }
 
 i {
-	font-size: 35px;
+	font-size: 30px;
 }
 
 #rounds {
@@ -92,6 +93,7 @@ td, th {
 tr:hover {
 	background-color: $fourth-color;
 }
+
 th {
 	color: $sixth-color;
 	background-color: $fiveth-color;
