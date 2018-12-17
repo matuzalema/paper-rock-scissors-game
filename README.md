@@ -1,1 +1,1 @@
- https://matuzalema.github.io/game-paper-scissors-rock/
+https://matuzalema.github.io/paper-rock-scissors-game/
