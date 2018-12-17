@@ -1,6 +1,3 @@
-var paper = document.getElementById("paper");
-var rock = document.getElementById("rock");
-var scissors = document.getElementById("scissors");
 var buttons = document.getElementById("buttons");
 
 var newGameButton = document.getElementById("newGame");
@@ -9,11 +6,9 @@ var compChoiceText = document.getElementById("compChoice");
 var resultOutput = document.getElementById("resultOutput");
 var resultOfRounds = document.getElementById("result");
 var rounds = document.getElementById("rounds");
-var textFinished = document.getElementById("textFinished");
 var scoreOutput = document.getElementById("scoreOutput");
 var buttonsToPlay = document.getElementsByClassName('player-move');
 var outputEntered = document.getElementById("outputEntered");
-var tableRounds = document.getElementById('tableRounds');
 var playerChoice = document.getElementsByClassName('playerChoice');
 
 
@@ -101,14 +96,12 @@ var playerMove = function(playerChoice){
 	scoreOutput.innerHTML = params.playerScore + " : " + params.compScore;
 	printToFinishText();
 	params.roundNumber += 1;
-	console.log(params.roundNumber);
-	refreshTable();
-	
+	refreshTable();	
 };
 
 var addScoreText = function(){
 	resultOutput.innerHTML = "";
-	params.resultText = resultOutput.insertAdjacentHTML('afterbegin', resultOfDraw() );
+	params.resultText = resultOutput.insertAdjacentHTML('afterbegin', resultOfDraw());
 };
 
 var storePlayerChoice = function(choice){
@@ -125,7 +118,7 @@ var storeCompChoice = function(choice){
 
 var choiceOfPlayer = function(playerChoice){
 	return playerChoice;
-	};
+};
 
 var randomNumber = function() {
     var drawnNumber = Math.floor((Math.random()*3)+1);
@@ -158,7 +151,6 @@ var resultOfDraw = function (){
 	} else {
 		return "Computer won!";
 	}
-
 };
 
 // rounds counter
@@ -168,10 +160,9 @@ var roundsCounter = function (){
 	} else if (resultOfDraw() === "Computer won!"){
 		params.compScore +=1;
 	}
-
-//store result status for history
-var roundsStatus = new RoundsStatus(params.roundNumber, params.playerChoice, params.compChoice, params.playerScore, params.compScore);
-params.progress.push(roundsStatus);
+	//store result status for history
+	var roundsStatus = new RoundsStatus(params.roundNumber, params.playerChoice, params.compChoice, params.playerScore, params.compScore);
+	params.progress.push(roundsStatus);
 };
 
 // ============= create table =============
@@ -201,6 +192,7 @@ var refreshTable = function(){
 
 var printToFinishText = function(){
 	if (params.playerScore == params.numberOfRounds || params.compScore == params.numberOfRounds) {
+		var textFinished = document.getElementById("textFinished");
 		textFinished = resultOfRounds.insertAdjacentHTML('afterbegin', printResultOfGame());
 	}
 };
@@ -212,30 +204,29 @@ var printResultOfGame = function() {
 	} else {
 		document.getElementById("modal-overlay").classList.add('show');
 		return 'Computer won!';
-		
 	}
 };
 
 // ========== modals ==============
 
 var showModal = function(){
-event.preventDefault();
-document.querySelector('#modal-overlay').classList.add('show');
+	event.preventDefault();
+	document.querySelector('#modal-overlay').classList.add('show');
 };
   
 
 var hideModal = function(event){
-event.preventDefault();
-document.querySelector('#modal-overlay').classList.remove('show');
-clearFields();
-buttons.classList.add('hide');
-rounds.classList.add('hide');
+	event.preventDefault();
+	document.querySelector('#modal-overlay').classList.remove('show');
+	clearFields();
+	buttons.classList.add('hide');
+	rounds.classList.add('hide');
 };
   
 var closeButtons = document.querySelectorAll('.modal .close');
-  for(var i = 0; i < closeButtons.length; i++){
+	for(var i = 0; i < closeButtons.length; i++){
     closeButtons[i].addEventListener('click', hideModal);
-  }
+	}
   
   
 document.querySelector('#modal-overlay').addEventListener('click', hideModal);
@@ -244,7 +235,7 @@ document.querySelector('#modal-overlay').addEventListener('click', hideModal);
 var modals = document.querySelectorAll('.modal');
 
 for(var i = 0; i < modals.length; i++){
-modals[i].addEventListener('click', function(event){
-  event.stopPropagation();
-});
+	modals[i].addEventListener('click', function(event){
+ 	event.stopPropagation();
+	});
 }
